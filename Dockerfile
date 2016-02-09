@@ -38,13 +38,16 @@ USER root
 # UNFOLD
 
 # get shiny and the latest, greatest DT:
-RUN ( /usr/local/bin/install.r shiny docopt ; \
+RUN ( apt-get update -y -qq && apt-get install -y --no-install-recommends libcairo2-dev ; \
+  /usr/local/bin/install.r shiny docopt Cairo ; \
   /usr/local/bin/installGithub.r 'rstudio/DT' ; \   
   useradd -U shiny ; \ 
   mkdir -p /srv/shiny ; \ 
   chown -R shiny:shiny /srv/shiny ; \
   chmod -R 755 /srv/shiny ; \
-  mkdir -p /opt/shiny )
+  mkdir -p /opt/shiny ; \
+  apt-get -y clean ; \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* )
 
 ADD runapp.r /opt/shiny/
 
