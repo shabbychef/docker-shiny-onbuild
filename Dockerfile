@@ -38,7 +38,7 @@ USER root
 # UNFOLD
 
 # get shiny and the latest, greatest DT:
-RUN ( apt-get update -y -qq && apt-get install -y --no-install-recommends libcairo2-dev ; \
+RUN ( apt-get update -y -qq && apt-get install -y --no-install-recommends libxt-dev libcairo2-dev ; \
   /usr/local/bin/install.r shiny docopt Cairo ; \
   /usr/local/bin/installGithub.r 'rstudio/DT' ; \   
   useradd -U shiny ; \ 
